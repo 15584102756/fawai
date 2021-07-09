@@ -139,11 +139,7 @@ function MidPage(props) {
             <img
                 id="image"
                 src={
-<<<<<<< HEAD
-                    "http://10.78.4.88:888/download?url=./dataset/base/20210609170854.record.00001/main/0_153.jpg"
-=======
                    `${props.imageArray[props.currentFrameIndex]}`
->>>>>>> a34b89d1a96aae547372be3220e8444f9c111ccc
                 }
                 alt="fdsa"
                 role="presentation"

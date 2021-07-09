@@ -19,20 +19,6 @@ export default class App extends React.Component {
         };
       }
 
-<<<<<<< HEAD
-      login = value => {
-            let user = Cookies.get('account');
-            user=eval('(' + user + ')');
-            console.log(user)
-            this.setState({
-                name: user.name
-            });
-            var qs = require('qs');
-            axios.post(server + 'login',qs.stringify({
-            'name':user.name,
-            'password':user.password
-            }))
-=======
     login = value => {
         let user = Cookies.get('account');
         user = eval('(' + user + ')');
@@ -45,7 +31,6 @@ export default class App extends React.Component {
             'name': user.name,
             'password': user.password
         }))
->>>>>>> a34b89d1a96aae547372be3220e8444f9c111ccc
             .then(function (response) {
                 console.log(response)
                 response.status === 200 ? localStorage.setItem("login", user.name) : ""
@@ -57,13 +42,8 @@ export default class App extends React.Component {
     
       componentDidMount () {
         console.log(Cookies.get('account'))
-<<<<<<< HEAD
-        
-        if(Cookies.get('account')){
-=======
 
         if (Cookies.get('account')) {
->>>>>>> a34b89d1a96aae547372be3220e8444f9c111ccc
 
             this.login()
     
