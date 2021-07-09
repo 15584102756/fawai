@@ -3,6 +3,7 @@
 const dreamview_ip = "http://10.78.4.88:8888/"; //统一设置服务器ip
 // var server_ip="http://10.78.7.169:888/";//统一设置服务器ip
 <<<<<<< HEAD
+<<<<<<< HEAD
 const server_ip = "http://10.78.4.88:888/"; //统一设置服务器ip
 const test_ip = "http://10.78.6.6:888/"
 const annotation = "http://10.78.4.88:555/";
@@ -10,6 +11,11 @@ const annotation = "http://10.78.4.88:555/";
 const server_ip = "http://10.78.4.88:8880/"; //统一设置服务器ip
 const annotation = "http://10.78.4.88:555/"
 >>>>>>> 6a192f8... 审核
+=======
+const server_ip = "http://10.78.4.88:888/"; //统一设置服务器ip
+const test_ip = "http://10.78.6.6:888/"
+const annotation = "http://10.78.4.88:555/";
+>>>>>>> 58a83a4... Solve conflict
 interface API {
   dataset: string;
   getSingleTask: string;
