@@ -26,6 +26,9 @@ const SaveToCloud_through_redud_store_button = connect(
   mapDispatchToProps
 )((props) => {
   const { SaveToCloud_through_redux_store, _taskID, sequence } = props;
+  React.useEffect(() => {
+    window.SaveToCloud_through_redux_store = SaveToCloud_through_redux_store
+  })
   return (
     <button
       style={{ display: "none" }}
@@ -45,7 +48,7 @@ export default function Annotator(props) {
   const { _id, _taskID, sequence } = router.query;
   console.log("router.query", router.query);
   var [imageArray, setImageArray] = React.useState([]);
-
+  var [annotationArray, setAnnotationArray] = React.useState([]);
   React.useEffect(() => {
     const imageRequest = new XMLHttpRequest();
     imageRequest.open(
@@ -56,13 +59,26 @@ export default function Annotator(props) {
     imageRequest.withCredentials = true;
     imageRequest.addEventListener("load", ({ target }) => {
       let { status, response, responseURL } = target;
+      console.log("My data retrieved ",JSON.parse(response).data)
       imageArray = JSON.parse(response).data.map((object, index) => {
         return object.jpg;
       });
-      console.log(imageArray);
+
       imageArray = imageArray.map((address) => {
         return `${dataServer}/${option.getMeterail}${address}`;
       });
+      console.log(imageArray);
+      console.log("Object keys",Object.keys(JSON.parse(response).data[0]) )
+      if (Object.keys(JSON.parse(response).data[0]).includes("json")) {
+        annotationArray = JSON.parse(response).data.map((object, index) => {
+          return object.json;
+        });
+        annotationArray = annotationArray.map((address) => {
+          return `${dataServer}/${option.getMeterail}${address}`;
+        });
+        console.log("加载已有标注", annotationArray);
+        setAnnotationArray(annotationArray);
+      }
       setImageArray(imageArray);
     });
     imageRequest.send();
