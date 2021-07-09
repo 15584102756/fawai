@@ -720,3 +720,40 @@
     font-size: 12px;
     color: #666;
 }
+.exmaine_home{
+    width: 850px;
+    margin: 0px auto;
+    margin-top: 100px;
+}
+.msgHeading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #dbe0e9;
+}
+.examineList{
+    padding: 24px 0;
+    border-bottom: 1px solid #dbe0e9;
+    display: flex;
+}
+.msgWrapper{
+    flex-grow: 1;
+    font-size: 14px !important;
+color: #272834;
+}
+.msgTitle{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.msgTitleText{
+    font-weight: 500;
+    color: #272834;
+    margin-right: 12px;
+    margin-left: 10px;
+}
+.msgDetails p{
+    margin-top: 12px;
+    margin-bottom: 0px;
+}

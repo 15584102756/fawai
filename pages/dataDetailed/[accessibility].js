@@ -60,6 +60,7 @@ export class Detailed extends React.Component {
       imgurl: "",
       basic: [],
       status:"",
+      statusSpan:"",
       filedata: [
         {
           jpg: "455",
@@ -159,6 +160,14 @@ export class Detailed extends React.Component {
         {}
       )
       .then((response) => {
+        const data = response.data.data.length;
+        if(data==0){
+          this.setState({
+            status:0,
+            statusSpan:"该数据集没有数据"
+          });
+        }
+
         var ite = response.data.data[0].jpg;
         var url =
           ite.substring(0, 10) +
@@ -181,7 +190,8 @@ export class Detailed extends React.Component {
         console.log(response)
         this.setState({
           basic: response.data.data[0],
-          status:response.data.data[0].flag
+          status:response.data.data[0].flag,
+          statusSpan:"请等待数据分解"
         });
       })
       .catch(function (error) {
@@ -196,7 +206,7 @@ export class Detailed extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.axios();
-    }, 500);
+    }, 100);
   }
   render() {
     let { accessibility } = this.props.router.query;
@@ -206,7 +216,7 @@ export class Detailed extends React.Component {
         <Header />
         <div style={{width:"400px",margin:"20px auto",paddingTop:"220px",display:this.state.status === 0 ? 'block' : 'none'}}>
           <img style={{width:"100%"}} src="/qsy.png" />
-          <div style={{textAlign:"center",color:"#666",marginTop:"20px",fontWeight:"500",fontSize:"17px"}}>请等待数据分解</div>
+          <div style={{textAlign:"center",color:"#666",marginTop:"20px",fontWeight:"500",fontSize:"17px"}}>{this.state.statusSpan}</div>
         </div>
         <div style={{display:this.state.status === 1 ? 'block' : 'none'}}>
         <Dialog
