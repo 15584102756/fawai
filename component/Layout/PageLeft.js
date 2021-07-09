@@ -9,21 +9,25 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import Grid from "@material-ui/core/Grid";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { borderBottom } from "@material-ui/system";
 import clsx from 'clsx'
+import LinearScaleIcon from '@material-ui/icons/LinearScale';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import store from '../../redux'
 import { connect } from 'react-redux'
+import DataSet from "../../styles/DataSet.module.css";
 import { createUpdateBoudingBoxAction } from '../../redux/action/BoundingBoxAction'
 import { createSetCurrentCategoryAction, createSetSelectedBoundingBoxAction } from '../../redux/action/GeneralReducerAction'
 const useStyle = makeStyles((theme) => ({
   flexItem: {
     flexBasis: "17.5vw",
-    padding: "4px"
+    padding: "4px",
+    background:"#272a42",
+    color:"#fff"
   },
   selectSpan: {
     "& span": {
@@ -104,24 +108,20 @@ function returnCategory(setCategory, currentFrameIndex) {
     return (
       <a key={index}
         style={{ cursor: "pointer" }}>
-        <li
+        <li 
           className={classes.selectMarker}
           onClick={() => {
             setCategory(index, currentFrameIndex,)
           }}
           onMouseEnter={(event) => {
             // console.log(event)
-            event.target.style.backgroundColor = "white"
-            event.target.style.color = "black"
-            event.target.classList.add("selected")
+            event.target.style.backgroundColor = "rgb(45, 49, 80)"
           }}
           onMouseLeave={(event) => {
             // console.log(event.target);
-            event.target.style.backgroundColor = class_colors[index]
-            event.target.style.color = "white"
-            event.target.classList.remove("selected")
+            event.target.style.backgroundColor = "rgba(0, 0, 0, 0.25)"
           }}
-          style={{ backgroundColor: class_colors[index], color: "white" }}>
+          style={{ display: "block",borderLeft:"4px solid" + class_colors[index],textIndent:"24px",lineHeight:"32px",backgroundColor: "rgba(0, 0, 0, 0.25)", color: "white",fontSize: "12px",fontWeight: "bold",borderRadius:"2px",marginBottom:"8px" }}>
           {value}
         </li>
       </a>)
@@ -132,12 +132,13 @@ const returnBoudingBoxList = (Collection,setCurrentSelectedBoundingBox) => {
   return Collection.map((BB, index) => {
     return (<a style={{ cursor: "pointer" }}>
       <li className={classes.selectMarker}
-        style={{ backgroundColor: class_colors[BB.category], color: "white" }}
+        style={{ display: "block",borderLeft:"4px solid" + class_colors[index],textIndent:"24px",lineHeight:"32px",backgroundColor: "rgba(0, 0, 0, 0.25)", color: "white",fontSize: "12px",fontWeight: "bold",borderRadius:"2px",marginBottom:"8px" }}
         onClick={() => { setCurrentSelectedBoundingBox(index) }}
       >
         {`BoundingBox (${index}) ${categories[BB.category]}`}
       </li>
-    </a>)
+    </a>
+    )
   })
 }
 const mapDispatchToProps = (dispatch) => (
@@ -161,65 +162,99 @@ function LeftContainer(props) {
   const classes = useStyle();
 
   const [showClassLabel, setShowClassLabel] = React.useState(false)
-  const [showBoundingBox, setShowBoundingBox] = React.useState(false)
+  const [showBoundingBox, setShowBoundingBox] = React.useState(true)
   return (
-    <Grid item className={clsx(classes.flexItem, "rensiyang")}>
-      {"        "}
-      <List style={{ paddingTop: 0 }}>
-        <ListItem
-          button
-          onClick={() => {
-            setShowClassLabel(!showClassLabel);
-          }}
-          className={classes.selectListAfter}
-        >
-          <ListItemIcon className={classes.center}>
-            {!showClassLabel ? (
-              <ArrowRightIcon />
-            ) : (
-              <ArrowDropDownIcon />
-            )}
-            <ListItemText
-              primary={`Categories `}
-              className={classes.selectSpan}
-              style={{ marginLeft: "4px" }}
-            />
-            <span style={{ marginLeft: "115px" }}> {"(23)"}</span>
-          </ListItemIcon>
-        </ListItem>
-        <Divider style={{ backgroundColor: "rgb(0 0 0 / 8%)", marginLeft: "19px" }} />
-        <Collapse in={showClassLabel}>
-          {(() => { return (<ul> {returnCategory(props.setCategory, props.currentFrameIndex)} </ul>) })()}
-        </Collapse>
-        <ListItem
-          button
-          onClick={() => {
-            setShowBoundingBox(!showBoundingBox);
-          }}
-          className={classes.selectListAfter}
-        >
-          <ListItemIcon className={classes.center}>
-            {!showBoundingBox ? (
-              <ArrowRightIcon />
-            ) : (
-              <ArrowDropDownIcon />
-            )}
-            <ListItemText
-              primary={`标注框 `}
-              className={classes.selectSpan}
-              style={{ marginLeft: "4px" }}
-            />
-            <span style={{ marginLeft: "115px" }}>
-              {`${props.BoundingBoxCollection[props.currentFrameIndex].length}`}</span>
-          </ListItemIcon>
-        </ListItem>
-        <Collapse in={showBoundingBox}>
-          {<ul>
-            {returnBoudingBoxList(props.BoundingBoxCollection[props.currentFrameIndex],props.setCurrentSelectedBoundingBox)}
-          </ul>}
-        </Collapse>
-      </List>
-    </Grid>
+    <div style={{display:"flex"}}>
+      <div class={DataSet.leftTap}>
+        <div class={DataSet.leftTapList}>
+            工具
+        </div>
+        <div class={DataSet.tapBoxList}>
+          <div style={{display: "flex",flexDirection: "column",alignItems: "center",margin: "8px 0px"}}>
+            <div class={DataSet.boxTap}>
+              <CheckBoxOutlineBlankIcon />
+            </div>
+            <div class={DataSet.boxTap}>
+              <LinearScaleIcon />
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <Grid style={{width: "280px"}} item className={clsx(classes.flexItem, "rensiyang")}>
+        <div style={{display: "flex",flex: "0 0 36px",alignItems: "center",margin: "8px",marginRight: "24px"}}>
+          <div style={{display:"flex",border: "1px solid rgb(141, 142, 154)",width: "100%",height:"100%",borderRadius: "4px"}}>
+            <div className={showBoundingBox ? DataSet.BoxHidden: DataSet.BoxHiddenTwo}
+            onClick={() => {
+              setShowBoundingBox(true);
+              setShowClassLabel(false)
+            }}
+            >标注(3)</div>
+            <div
+            onClick={() => {
+              setShowClassLabel(true);
+              setShowBoundingBox(false)
+            }}
+            className={showClassLabel ? DataSet.BoxHidden: DataSet.BoxHiddenTwo}>标签(23)</div>
+          </div>
+        </div>
+        {"        "}
+        <List style={{ paddingTop: 0 }}>
+          {/* <ListItem
+            button
+            onClick={() => {
+              setShowClassLabel(!showClassLabel);
+            }}
+            className={classes.selectListAfter}
+          >
+            <ListItemIcon className={classes.center}>
+              {!showClassLabel ? (
+                <ArrowRightIcon />
+              ) : (
+                <ArrowDropDownIcon />
+              )}
+              <ListItemText
+                primary={`Categories `}
+                className={classes.selectSpan}
+                style={{ marginLeft: "4px" }}
+              />
+              <span style={{ marginLeft: "115px" }}> {"(23)"}</span>
+            </ListItemIcon>
+          </ListItem> */}
+          <Divider style={{ backgroundColor: "rgb(0 0 0 / 8%)", marginLeft: "19px" }} />
+          <Collapse in={showClassLabel}>
+            {(() => { return (<ul style={{marginLeft:"7px",padding:"0px",width:"90%",height:"675px",overflowY:"auto"}}> {returnCategory(props.setCategory, props.currentFrameIndex)} </ul>) })()}
+          </Collapse>
+          {/* <ListItem
+            button
+            onClick={() => {
+              setShowBoundingBox(!showBoundingBox);
+            }}
+            className={classes.selectListAfter}
+          >
+            <ListItemIcon className={classes.center}>
+              {!showBoundingBox ? (
+                <ArrowRightIcon />
+              ) : (
+                <ArrowDropDownIcon />
+              )}
+              <ListItemText
+                primary={`标注框 `}
+                className={classes.selectSpan}
+                style={{ marginLeft: "4px" }}
+              />
+              <span style={{ marginLeft: "115px" }}>
+                {`${props.BoundingBoxCollection[props.currentFrameIndex].length}`}</span>
+            </ListItemIcon>
+          </ListItem> */}
+          <Collapse in={showBoundingBox}>
+            {<ul style={{marginLeft:"7px",padding:"0px",width:"90%",height:"675px",overflowY:"auto"}}>
+              {returnBoudingBoxList(props.BoundingBoxCollection[props.currentFrameIndex],props.setCurrentSelectedBoundingBox)}
+            </ul>}
+          </Collapse>
+        </List>
+      </Grid>
+    </div>
   );
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LeftContainer)

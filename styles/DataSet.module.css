@@ -757,3 +757,88 @@ color: #272834;
     margin-top: 12px;
     margin-bottom: 0px;
 }
+.sheet{
+    height: 48px;
+    margin-top: 0px;
+    transform: translateY(0px);
+    left: 0px;
+    right: 0px;
+    border-radius: 0px;
+    background-color: #272a42 !important;
+    color: #fff;
+    border-bottom: 1px solid rgb(11, 13, 18);
+}
+.numb_list{
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+body .sub{
+    background: #272a42 ;
+}
+body .sub:hover{
+    background: #454861;
+}
+body .pagenet{
+    background: #3e4160;
+    color: #c9c9c9;
+    margin: 0px 7px;
+}
+body .pagenet:hover{
+    background: #444768;
+}
+.leftTap{
+    display: flex;
+    flex: 0 0 48px;
+    flex-direction: column;
+    background: rgb(39, 42, 66) none repeat scroll 0% 0%;
+    border-left: 1px solid rgb(10, 11, 16);
+    overflow-y: hidden;
+    border-right:1px solid rgb(11, 13, 18);
+    color: rgb(201, 201, 201);
+    font-size: 12px;
+}
+.leftTapList{
+    display: flex;
+    flex: 0 0 32px;
+    align-items: center;
+    justify-content: center;
+}
+.tapBoxList{
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.boxTap{
+    border-radius: 4px;
+    margin-bottom: 16px;
+    min-width: 0px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+.boxTap .MuiSvgIcon-root ,.boxTap svg{
+    margin-top: 2px;
+}
+.BoxHidden,.BoxHiddenTwo{
+    flex: 1 1 0%;
+    height: 100%;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    background: rgb(141, 142, 154) none repeat scroll 0% 0%;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+}
+.BoxHiddenTwo{
+    background: initial;
+}
+.MuiGrid-wrap-xs-nowrap{
+    height: 100%;
+}
